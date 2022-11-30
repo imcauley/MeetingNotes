@@ -1,5 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import { text } from 'stream/consumers';
 import * as vscode from 'vscode';
 
 // This method is called when your extension is activated
@@ -16,11 +17,34 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('meeting-notes.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from meeting_notes!');
+		let textEditor = vscode.window.activeTextEditor;
+		if (textEditor === undefined) {
+			return;
+		}
+
+		let document = textEditor.document;
+		let text = document.getText();
+
+		var match = text.match(/# Todo *\n(\[.*\n?)*\n?/);
+		if (match === null) {
+			vscode.window.showErrorMessage("Couldn't find Todo header");
+		} else {
+			if (match.index !== undefined) {
+				let message = match.index + match.length;
+				vscode.window.showInformationMessage(message.toString());
+
+				textEditor.edit(editBuilder => {
+					editBuilder.insert(new vscode.Position(message + 2, 0), "[ ] test\n");
+				});
+			}
+		}
+
+
+
 	});
 
 	context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
