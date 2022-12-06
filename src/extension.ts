@@ -42,30 +42,33 @@ function addToList(list: String) {
 
 	if (match === null) {
 		vscode.window.showErrorMessage("Couldn't find " + list + "  header");
-	} else {
-		if (match.index !== undefined) {
-			let beforeText = text.slice(0, match.index);
-			let beforeLines = beforeText.split(/\r\n|\r|\n/).length;
-
-			let selectionLines = match[0].trim().split(/\r\n|\r|\n/).length;
-
-			let line = beforeLines + selectionLines - 1;
-			let insertionText = getListDelimiter(list) + " \n";
-
-			if (line >= document.lineCount) {
-				insertionText = "\n" + insertionText;
-			}
-
-			let insertPosition = new vscode.Position(line, 0);
-			let cursorPosition = new vscode.Position(line, 4);
-
-			textEditor.edit(editBuilder => {
-				editBuilder.insert(insertPosition, insertionText);
-			});
-
-			textEditor.selection = new vscode.Selection(cursorPosition, cursorPosition);
-		}
+		return;
 	}
+
+	if (match.index === undefined) {
+		return;
+	}
+
+	let beforeText = text.slice(0, match.index);
+	let beforeLines = beforeText.split(/\r\n|\r|\n/).length;
+
+	let selectionLines = match[0].trim().split(/\r\n|\r|\n/).length;
+
+	let line = beforeLines + selectionLines - 1;
+	let insertionText = getListDelimiter(list) + " \n";
+
+	if (line >= document.lineCount) {
+		insertionText = "\n" + insertionText;
+	}
+
+	let insertPosition = new vscode.Position(line, 0);
+	let cursorPosition = new vscode.Position(line, 4);
+
+	textEditor.edit(editBuilder => {
+		editBuilder.insert(insertPosition, insertionText);
+	});
+
+	textEditor.selection = new vscode.Selection(cursorPosition, cursorPosition);
 }
 
 // This method is called when your extension is deactivated
