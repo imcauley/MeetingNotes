@@ -6,4 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.1]
 
-- Support for jumping to three headings: Notes, Agenda, and Todo
+- Support for jumping to three headings: Notes, Agenda, and Todo\
+
+## [0.2]
+
+- Added meeting template
+
+## [0.3]
+
+- Added default keybindings

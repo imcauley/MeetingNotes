@@ -3,7 +3,7 @@
   "displayName": "meeting_notes",
   "publisher": "IsaacMcAuley",
   "description": "A tool for to making meeting notes easier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.73.0"
   },
@@ -40,6 +40,20 @@
       {
         "language": "markdown",
         "path": "./snippets/snippet.json"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "meeting-notes.addToAgenda",
+        "key": "Cmd+Ctrl+i"
+      },
+      {
+        "command": "meeting-notes.addToNotes",
+        "key": "Cmd+Ctrl+o"
+      },
+      {
+        "command": "meeting-notes.addToTodo",
+        "key": "Cmd+Ctrl+p"
       }
     ]
   },
