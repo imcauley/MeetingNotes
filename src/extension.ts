@@ -6,16 +6,31 @@ import * as vscode from 'vscode';
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	let disposable = vscode.commands.registerCommand('meeting-notes.addToTodo', () => {
+	let todo = vscode.commands.registerCommand('meeting-notes.addToTodo', () => {
 		addToList("Todo");
 	});
+	let agenda = vscode.commands.registerCommand('meeting-notes.addToAgenda', () => {
+		addToList("Agenda");
+	});
+	let notes = vscode.commands.registerCommand('meeting-notes.addToNotes', () => {
+		addToList("Notes");
+	});
 
-	context.subscriptions.push(disposable);
+
+	context.subscriptions.push(todo);
+	context.subscriptions.push(agenda);
+	context.subscriptions.push(notes);
 }
 
 function getListRegexp(list: String) {
 	if (list === 'Todo') {
 		return /# Todo *\n(\[.*\n?)*\n?/;
+	}
+	if (list === 'Agenda') {
+		return /# Agenda *\n(\-.*\n?)*\n?/;
+	}
+	if (list === 'Notes') {
+		return /# Notes *\n(\-.*\n?)*\n?/;
 	}
 
 	throw new Error("Wrong list type");

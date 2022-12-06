@@ -10,7 +10,9 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:meeting-notes.addToTodo"
+    "onCommand:meeting-notes.addToTodo",
+    "onCommand:meeting-notes.addToAgenda",
+    "onCommand:meeting-notes.addToNotes"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,6 +20,14 @@
       {
         "command": "meeting-notes.addToTodo",
         "title": "Add To Todo"
+      },
+      {
+        "command": "meeting-notes.addToAgenda",
+        "title": "Add To Agenda"
+      },
+      {
+        "command": "meeting-notes.addToNotes",
+        "title": "Add To Notes"
       }
     ]
   },
