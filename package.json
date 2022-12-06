@@ -12,7 +12,8 @@
     "url": "git://github.com/imcauley/MeetingNotes"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Snippets"
   ],
   "activationEvents": [
     "onCommand:meeting-notes.addToTodo",
@@ -33,6 +34,12 @@
       {
         "command": "meeting-notes.addToNotes",
         "title": "Add To Notes"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./snippets/snippet.json"
       }
     ]
   },

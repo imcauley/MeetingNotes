@@ -1,0 +1,22 @@
+{
+    "Meeting Notes": {
+        "prefix": [
+            "meeting"
+        ],
+        "body": [
+            "# ${1:meeting title}",
+            "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+            "",
+            "Keywords: $0",
+            "",
+            "",
+            "# Agenda",
+            "",
+            "# Notes",
+            "",
+            "# Todo",
+            ""
+        ],
+        "description": "Meeting notes template"
+    }
+}
