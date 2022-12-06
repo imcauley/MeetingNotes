@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:meeting-notes.helloWorld"
+    "onCommand:meeting-notes.addToTodo"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "meeting-notes.helloWorld",
-        "title": "Hello World"
+        "command": "meeting-notes.addToTodo",
+        "title": "Add To Todo"
       }
     ]
   },
