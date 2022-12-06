@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('meeting-notes.helloWorld', () => {
+	let disposable = vscode.commands.registerCommand('meeting-notes.addToTodo', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		let textEditor = vscode.window.activeTextEditor;
@@ -26,16 +26,31 @@ export function activate(context: vscode.ExtensionContext) {
 		let text = document.getText();
 
 		var match = text.match(/# Todo *\n(\[.*\n?)*\n?/);
+
 		if (match === null) {
 			vscode.window.showErrorMessage("Couldn't find Todo header");
 		} else {
 			if (match.index !== undefined) {
-				let message = match.index + match.length;
-				vscode.window.showInformationMessage(message.toString());
+				let beforeText = text.slice(0, match.index);
+				let beforeLines = beforeText.split(/\r\n|\r|\n/).length;
+
+				let selectionLines = match[0].trim().split(/\r\n|\r|\n/).length;
+
+				let line = beforeLines + selectionLines - 1;
+				let insertionText = "[ ] \n";
+
+				if (line >= document.lineCount) {
+					insertionText = "\n" + insertionText;
+				}
+
+				let insertPosition = new vscode.Position(line, 0);
+				let cursorPosition = new vscode.Position(line, 4);
 
 				textEditor.edit(editBuilder => {
-					editBuilder.insert(new vscode.Position(message + 2, 0), "[ ] test\n");
+					editBuilder.insert(insertPosition, insertionText);
 				});
+
+				textEditor.selection = new vscode.Selection(cursorPosition, cursorPosition);
 			}
 		}
 
